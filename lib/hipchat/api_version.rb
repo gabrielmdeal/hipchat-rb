@@ -318,6 +318,22 @@ module HipChat
         }[version]
       end
 
+      def update_config
+        {
+          # 'v1' => {
+          #   :url => URI::escape('/update'),
+          #   :body_format => :to_json,
+          #   :query_params => { :user_id => user_id }
+          # },
+          'v2' => {
+            :url => URI::escape("/#{user_id}"),
+            :body_format => :to_json,
+            :query_params => {},
+            :allowed_params => [ :name, :roles, :title, :presence, :mention_name, :is_group_admin, :timezone, :password, :email ]
+          }
+        }[version]
+      end
+
       def history_config
         raise InvalidApiVersion, 'This functionality is not supported in API v1' unless version.eql?('v2')
 
