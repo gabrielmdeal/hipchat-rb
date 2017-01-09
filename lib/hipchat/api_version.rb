@@ -320,16 +320,17 @@ module HipChat
 
       def update_config
         {
-          # 'v1' => {
-          #   :url => URI::escape('/update'),
-          #   :body_format => :to_json,
-          #   :query_params => { :user_id => user_id }
-          # },
+          'v1' => {
+            :url => URI::escape('/update'),
+            :body_format => :to_json,
+            :query_params => { :user_id => user_id },
+            :allowed_params => [ :email, :is_group_admin, :mention_name, :name, :password, :status, :title, :user_id ]
+          },
           'v2' => {
             :url => URI::escape("/#{user_id}"),
             :body_format => :to_json,
             :query_params => {},
-            :allowed_params => [ :name, :roles, :title, :presence, :mention_name, :is_group_admin, :timezone, :password, :email ]
+            :allowed_params => [ :email, :is_group_admin, :mention_name, :name, :password, :presence, :roles, :timezone, :title ]
           }
         }[version]
       end
